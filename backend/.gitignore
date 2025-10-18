@@ -1,0 +1,14 @@
+# Go build
+/bin/
+/dist/
+*.exe
+# env
+.env
+.env.*
+!.env.example
+# IDE
+.vscode/
+.idea/
+# cache
+/vendor/
+go.sum

@@ -1,0 +1,8 @@
+# root ignores
+node_modules/
+frontend/node_modules/
+backend/bin/
+dist/
+.env
+*.zip
+mysql_data/
