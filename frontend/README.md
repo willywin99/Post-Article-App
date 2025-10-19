@@ -1,19 +1,66 @@
-# Sharing Vision - Sleek Frontend (local assets)
+# Post Article Frontend
 
-This package contains a React + Vite frontend pre-integrated with a minimal local Sleek-like CSS (dark sidebar).
+React frontend application for managing articles with SleekDashboard UI.
 
-## Install & Run
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Run dev server:
-   ```bash
-   npm run dev
-   ```
-3. Open http://localhost:5173
+## 🚀 Tech Stack
 
-The frontend expects the backend API at: http://localhost:8080/articles
-You can set a different API base by setting `VITE_API_BASE` env variable.
+- React, Vite, SleekDashboard, Axios, React Router
 
-Note: This package includes a minimal local CSS that mimics Sleek Dashboard. Replace `public/assets/css/sleek.css` with the real Sleek CSS if you have it.
+## 📋 Features
+
+- Dashboard with tabs (Published, Drafts, Thrash)
+- Add/Edit articles with validation
+- Preview articles
+- Responsive design
+- Status management
+
+## 🏗️ Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/UI/
+│   ├── pages/
+│   │   ├── AllPosts.jsx
+│   │   ├── AddEdit.jsx
+│   │   └── Preview.jsx
+│   ├── api.js
+│   └── main.jsx
+├── public/
+├── package.json
+└── vite.config.mjs
+```
+
+## 🛠️ Installation
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on http://localhost:5173
+
+## 🔌 API Integration
+
+- fetchArticles(limit, offset, status)
+- fetchArticle(id)
+- createArticle(articleData)
+- updateArticle(id, articleData)
+- deleteArticle(id)
+
+## 🎨 UI Components & Validation
+
+- Title: min 20 chars
+- Content: min 200 chars
+- Category: min 3 chars
+- Status: required (publish/draft/thrash)
+
+## 📝 License
+
+MIT License
+
+## 👥 Author
+
+Willywin99  
+GitHub: @willywin99
