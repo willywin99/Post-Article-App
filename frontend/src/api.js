@@ -1,40 +1,45 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8080';
+import axios from 'axios';
 
-export async function fetchArticles(limit=10, offset=0, status='') {
-  const url = new URL(`${API_BASE}/articles`);
-  url.searchParams.set('limit', limit);
-  url.searchParams.set('offset', offset);
-  if (status) url.searchParams.set('status', status);
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('failed to fetch');
-  return res.json();
-}
+const API_BASE = "http://localhost:8080/article";
 
-export async function fetchArticle(id) {
-  const res = await fetch(`${API_BASE}/articles/${id}`);
-  if (!res.ok) throw new Error('failed to fetch article');
-  return res.json();
-}
+// Get all posts with pagination and status filter
+export const fetchArticles = async (limit = 10, offset = 0, status = '') => {
+  const params = { limit, offset };
+  if (status) params.status = status;
+  
+  const response = await axios.get(`${API_BASE}`, { params });
+  return response.data;
+};
 
-export async function createArticle(body) {
-  const res = await fetch(`${API_BASE}/articles`, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify(body)
-  });
-  return res.json();
-}
+// Get single post by ID
+export const fetchArticle = async (id) => {
+  const response = await axios.get(`${API_BASE}/${id}`);
+  return response.data;
+};
 
-export async function updateArticle(id, body) {
-  const res = await fetch(`${API_BASE}/articles/${id}`, {
-    method: 'PUT',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify(body)
-  });
-  return res.json();
-}
+// Create new post
+export const createArticle = async (postData) => {
+  const response = await axios.post(`${API_BASE}/`, postData);
+  return response.data;
+};
 
-export async function deleteArticle(id) {
-  const res = await fetch(`${API_BASE}/articles/${id}`, { method:'DELETE' });
-  return res.json();
-}
+// Update post
+export const updateArticle = async (id, postData) => {
+  const response = await axios.put(`${API_BASE}/${id}`, postData);
+  return response.data;
+};
+
+// Delete post
+export const deleteArticle = async (id) => {
+  const response = await axios.delete(`${API_BASE}/${id}`);
+  return response.data;
+};
+
+// Export as default object too (for compatibility)
+export default {
+  fetchArticles,
+  fetchArticle,
+  createArticle,
+  updateArticle,
+  deleteArticle
+};
