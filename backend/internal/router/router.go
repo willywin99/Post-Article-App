@@ -1,7 +1,7 @@
 package router
 
 import (
-	"backend/internal/article"
+	"backend/internal/post"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -18,12 +18,15 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 		AllowCredentials: true,
 	}))
 
-	h := article.NewHandler(db)
-	r.POST("/articles", h.Create)
-	r.GET("/articles", h.List)
-	r.GET("/articles/:id", h.Get)
-	r.PUT("/articles/:id", h.Update)
-	r.DELETE("/articles/:id", h.Delete)
+	h := post.NewHandler(db)
+
+	r.POST("/article/", h.Create)      // POST /article/
+	r.GET("/article/:id", h.Get)       // GET /article/1
+	r.PUT("/article/:id", h.Update)    // PUT /article/1
+	r.DELETE("/article/:id", h.Delete) // DELETE /article/1
+
+	// For pagination - use query parameters instead of path parameters
+	r.GET("/article", h.List) // GET /article?limit=10&offset=0
 
 	return r
 }

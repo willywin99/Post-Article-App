@@ -1,3 +1,4 @@
+# build stage
 FROM node:18-alpine AS builder
 WORKDIR /app
 ARG VITE_API_BASE=http://backend:8080
@@ -7,6 +8,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
+# production stage
 FROM nginx:1.25-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
