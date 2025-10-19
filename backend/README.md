@@ -113,6 +113,9 @@ Use Postman or curl:
 curl "http://localhost:8080/article?limit=5&offset=0"
 ```
 
+Postman Collection:
+[Post-Article-App REST API.postman_collection.json](/backend/Post-Article-App%20REST%20API.postman_collection.json)
+
 ## 📝 License
 
 MIT License
